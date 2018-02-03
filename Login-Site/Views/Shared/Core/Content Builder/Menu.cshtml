@@ -1,0 +1,17 @@
+﻿@using Login_Site.CodeLibraries
+@model Login_Site.Models.Core.ContentBuilder.Menu
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container@(Model.FullWidth ? "-fluid" : "")">
+        <a href="@GlobalHelper.GetRoot(UmbracoContext.Current.PageId.Value).UrlWithDomain()" class="navbar-brand">@Model.Title</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                @foreach (var child in Model.Children) {
+                    @Html.Action(child.DocumentTypeAlias, GlobalHelper.ContentBuilder, new { page = child })
+                }
+            </ul>
+        </div>
+    </div>
+</nav>

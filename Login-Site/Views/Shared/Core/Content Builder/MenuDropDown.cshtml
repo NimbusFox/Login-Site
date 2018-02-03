@@ -1,0 +1,10 @@
+﻿@using Login_Site.CodeLibraries
+@model Login_Site.Models.Core.ContentBuilder.MenuDropDown
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="@Model.Text" aria-expanded="false">@Model.Text <span class="caret"></span></a>
+    <ul class="dropdown-menu" aria-labelledby="@Model.Text">
+        @foreach (var child in Model.Children) {
+            @Html.Action(child.DocumentTypeAlias, GlobalHelper.ContentBuilder, new { page = child })
+        }
+    </ul>
+</li>

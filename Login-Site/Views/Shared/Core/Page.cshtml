@@ -1,0 +1,11 @@
+﻿@using Login_Site.CodeLibraries
+@model Login_Site.Models.Core.Page
+
+
+<footer>
+    @if (Model.DisplayEditedTime) {
+        var latestEdit = GlobalHelper.GetLatestEdit(Model.Page);
+        <div>Page edited: @latestEdit.UpdateDate.ToString("dd/MM/yyyy h:mm:ss tt") by @latestEdit.WriterName</div><br/>
+    }
+    @Html.Partial("Core/Footer")
+</footer>

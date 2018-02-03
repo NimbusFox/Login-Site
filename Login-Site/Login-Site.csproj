@@ -85,6 +85,9 @@
     <Reference Include="ImageProcessor.Web, Version=4.8.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ImageProcessor.Web.4.8.7\lib\net45\ImageProcessor.Web.dll</HintPath>
     </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.4.2.0\lib\net45\ImageResizer.dll</HintPath>
+    </Reference>
     <Reference Include="interfaces, Version=1.0.6596.20990, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.7.9\lib\net45\interfaces.dll</HintPath>
     </Reference>
@@ -306,9 +309,28 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SignalR.cs" />
+    <Compile Include="CodeLibraries\DatabaseHelper.cs" />
+    <Compile Include="CodeLibraries\GlobalHelper.cs" />
+    <Compile Include="CodeLibraries\MembersHelper.cs" />
+    <Compile Include="CodeLibraries\PageHelper.cs" />
+    <Compile Include="Controllers\Core\CoreContentBuilderController.cs" />
+    <Compile Include="Controllers\Core\CookiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Content Builder\Image.cs" />
+    <Compile Include="Models\Content Builder\Menu.cs" />
+    <Compile Include="Models\Content Builder\MenuDropDown.cs" />
+    <Compile Include="Models\Content Builder\MenuLink.cs" />
+    <Compile Include="Models\Content Builder\MenuSubDropDown.cs" />
+    <Compile Include="Models\Core\GoogleServices.cs" />
+    <Compile Include="Models\Core\Gresult.cs" />
+    <Compile Include="Models\Core\ItemVisibility.cs" />
+    <Compile Include="Models\Core\Master.cs" />
+    <Compile Include="Models\Core\Page.cs" />
+    <Compile Include="Models\Core\PageMaster.cs" />
+    <Compile Include="Models\Core\Pages.cs" />
+    <Compile Include="Models\Core\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -334,12 +356,8 @@
     <Content Include="config\Lang\ru-RU.user.xml" />
     <Content Include="config\Lang\sv-SE.user.xml" />
     <Content Include="config\Lang\zh-CN.user.xml" />
-    <Content Include="Css\bootstrap-grid.css" />
-    <Content Include="Css\bootstrap-grid.min.css" />
-    <Content Include="Css\bootstrap-reboot.css" />
-    <Content Include="Css\bootstrap-reboot.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Css\bootstrap.css" />
-    <Content Include="Css\bootstrap.min.css" />
     <Content Include="default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -385,12 +403,6 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Css\bootstrap.min.css.map" />
-    <Content Include="Css\bootstrap.css.map" />
-    <Content Include="Css\bootstrap-reboot.min.css.map" />
-    <Content Include="Css\bootstrap-reboot.css.map" />
-    <Content Include="Css\bootstrap-grid.min.css.map" />
-    <Content Include="Css\bootstrap-grid.css.map" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -424,8 +436,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Textstring.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Rte.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\Media.cshtml" />
@@ -445,12 +455,18 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Master.cshtml" />
+    <Content Include="Views\Shared\Core\Page.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\Menu.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\MenuDropDown.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\MenuLink.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\MenuSubDropDown.cshtml" />
+    <Content Include="Views\Shared\Core\Cookies.cshtml" />
+    <Content Include="Views\Shared\Core\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -461,6 +477,10 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\LoginSystem\global.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bootstrap\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
