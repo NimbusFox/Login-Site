@@ -1,1 +1,6 @@
-﻿
+﻿@using NimbusFox.Login_Site.CodeLibraries.Core
+@using NimbusFox.Login_Site.Models.Core
+@if (GlobalHelper.HasValidReCaptcha) {
+    var site = new SiteModel(GlobalHelper.GetRoot());
+    <div id="Recaptcha" class="g-recaptcha" data-sitekey="@site.GoogleServices.ReCaptchaSiteKey" data-theme="@site.GoogleServices.ReCaptchaColor"></div>
+}

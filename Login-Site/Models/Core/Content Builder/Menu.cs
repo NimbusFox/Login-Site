@@ -3,7 +3,7 @@ using System.Linq;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.Models.Core.Content_Builder {
+namespace NimbusFox.Login_Site.Models.Core.Content_Builder {
     public class Menu {
         public string Title { get; set; }
         public bool FullWidth { get; set; }

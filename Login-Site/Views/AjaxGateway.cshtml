@@ -1,0 +1,19 @@
+﻿@using NimbusFox.Login_Site.CodeLibraries.Core
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+
+    if (Request.QueryString.HasKeys()) {
+        if (Request.QueryString.AllKeys.Select(key => key.ToLower()).Contains("call")) {
+            try {
+                Html.RenderAction(Request.QueryString[Request.QueryString.AllKeys.First(key => key.ToLower() == "call")], GlobalHelper.AjaxGateway);
+            } catch (Exception ex) {
+                if (ex.InnerException is HttpException) {
+                    // Will ignore errors that say a certain function doesn't exist
+                } else {
+                    throw;
+                }
+            }
+        }
+    }
+}

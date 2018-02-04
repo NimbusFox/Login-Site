@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Login_Site.CodeLibraries.Core;
-using Login_Site.Models.Core;
+using NimbusFox.Login_Site.CodeLibraries.Core;
+using NimbusFox.Login_Site.Models.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
-using Login_Site.Models.Core.Content_Builder;
+using NimbusFox.Login_Site.Models.Core.Content_Builder;
 
-namespace Login_Site.Controllers.Core {
+namespace NimbusFox.Login_Site.Controllers.Core {
     public class CoreContentBuilderController : SurfaceController {
         public ActionResult Menu(IPublishedContent page) {
             return PartialView("Core/Content Builder/Menu", new Menu(page));
@@ -47,11 +47,11 @@ namespace Login_Site.Controllers.Core {
         }
 
         public ActionResult LoginForm(IPublishedContent page) {
-            return PartialView("Core/Content Builder/LoginForm", new LoginForm(page));
+            return PartialView("Core/Content Builder/LoginForm");
         }
 
         public ActionResult RegisterForm(IPublishedContent page) {
-            return PartialView("Core/Content Builder/RegisterForm", new RegisterForm(page));
+            return PartialView("Core/Content Builder/RegisterForm");
         }
 
         public ActionResult LogoutDisplay(IPublishedContent page) {

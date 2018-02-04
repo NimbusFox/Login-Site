@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Login_Site.CodeLibraries.Core;
+using NimbusFox.Login_Site.CodeLibraries.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.Models.Core {
+namespace NimbusFox.Login_Site.Models.Core {
     public class Pages {
         public IPublishedContent HomePage { get; }
         public IPublishedContent LoginPage { get; }

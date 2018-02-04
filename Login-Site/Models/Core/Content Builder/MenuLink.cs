@@ -1,7 +1,7 @@
 ﻿using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.Models.Core.Content_Builder {
+namespace NimbusFox.Login_Site.Models.Core.Content_Builder {
     public class MenuLink : ItemVisibility {
         public string Text { get; set; }
         public string Url { get; set; }

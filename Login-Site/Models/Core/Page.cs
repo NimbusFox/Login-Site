@@ -1,6 +1,6 @@
 ﻿using Umbraco.Core.Models;
 
-namespace Login_Site.Models.Core {
+namespace NimbusFox.Login_Site.Models.Core {
     public class Page : PageMaster {
         public Page() { }
 

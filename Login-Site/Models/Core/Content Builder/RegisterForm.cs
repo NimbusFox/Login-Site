@@ -2,12 +2,12 @@
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.Models.Core.Content_Builder {
+namespace NimbusFox.Login_Site.Models.Core.Content_Builder {
     public class RegisterForm {
         public string RedirectMessage { get; }
         public string From { get; }
         public string Subject { get; }
-        public HtmlString Message { get; }
+        public HtmlString Message { get; set; }
 
         public RegisterForm() { }
 

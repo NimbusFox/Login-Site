@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Login_Site {
+namespace NimbusFox.Login_Site {
     public class FilterConfig {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters) {
             filters.Add(new HandleErrorAttribute());

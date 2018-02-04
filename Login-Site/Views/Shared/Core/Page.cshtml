@@ -1,11 +1,14 @@
-﻿@using Login_Site.CodeLibraries.Core
-@model Login_Site.Models.Core.Page
+﻿@using NimbusFox.Login_Site.CodeLibraries.Core
+@model NimbusFox.Login_Site.Models.Core.Page
 
+@foreach (var child in Model.Page.Children) {
+    Html.RenderAction(child.DocumentTypeAlias, GlobalHelper.ContentBuilder, new { page = child });
+}
 
 <footer>
     @if (Model.DisplayEditedTime) {
         var latestEdit = GlobalHelper.GetLatestEdit(Model.Page);
-        <div>Page edited: @latestEdit.UpdateDate.ToString("dd/MM/yyyy h:mm:ss tt") by @latestEdit.WriterName</div><br/>
+        <div>Page edited: @latestEdit.UpdateDate.ToString("dd/MM/yyyy h:mm:ss tt") by @latestEdit.WriterName</div><br />
     }
     @Html.Partial("Core/Footer")
 </footer>

@@ -1,3 +1,4 @@
+var grecaptcha;
 function acceptCookies() {
     $.ajax({
         url: "/umbraco/surface/Cookies/Accept",
@@ -8,4 +9,11 @@ function acceptCookies() {
         }
     });
 }
-//# sourceMappingURL=global.js.map
+function refreshScripts() {
+    if ($("#Recaptcha").length) {
+        grecaptcha.render("Recaptcha", { sitekey: $("#Recaptcha").data("sitekey"), theme: $("#Recaptcha").data("theme") });
+    }
+}
+$(document).ready(function () {
+    refreshScripts();
+});

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Login_Site.Models.Core;
+using NimbusFox.Login_Site.Models.Core;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Security;
 
-namespace Login_Site.CodeLibraries.Core {
+namespace NimbusFox.Login_Site.CodeLibraries.Core {
     public static class MembersHelper {
         public static bool IsLoggedIn {
             get {

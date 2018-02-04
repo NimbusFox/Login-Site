@@ -1,7 +1,7 @@
 ﻿using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.Models.Core {
+namespace NimbusFox.Login_Site.Models.Core {
     public class GoogleServices {
         public string AnalyticsID { get; set; }
         public string ReCaptchaSiteKey { get; set; }

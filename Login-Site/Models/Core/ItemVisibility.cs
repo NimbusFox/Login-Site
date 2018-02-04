@@ -2,7 +2,7 @@
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.Models.Core {
+namespace NimbusFox.Login_Site.Models.Core {
     public enum EItemVisibility {
         Users,
         NonRegistered,

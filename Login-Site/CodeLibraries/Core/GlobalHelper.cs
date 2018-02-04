@@ -5,13 +5,13 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
-using Login_Site.Models.Core;
+using NimbusFox.Login_Site.Models.Core;
 using Newtonsoft.Json;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.CodeLibraries.Core {
+namespace NimbusFox.Login_Site.CodeLibraries.Core {
     public static class GlobalHelper {
 
         public static string ContentBuilder {
@@ -26,9 +26,21 @@ namespace Login_Site.CodeLibraries.Core {
             }
         }
 
+        public static string AjaxGateway {
+            get {
+                if (ConfigurationManager.AppSettings.HasKeys()) {
+                    if (ConfigurationManager.AppSettings.AllKeys.Contains("AjaxGateway")) {
+                        return ConfigurationManager.AppSettings["AjaxGateway"];
+                    }
+                }
+
+                return "CoreAjax";
+            }
+        }
+
         public static bool HasValidReCaptcha {
             get {
-                var site = new Site(GetRoot());
+                var site = new SiteModel(GetRoot());
 
                 return !site.GoogleServices.ReCaptchaSiteKey.IsNullOrWhiteSpace() &&
                        !site.GoogleServices.ReCaptchaPrivateKey.IsNullOrWhiteSpace();
@@ -162,6 +174,10 @@ namespace Login_Site.CodeLibraries.Core {
 
         public static string CookieAcceptanceValue() {
             return true.ToString();
+        }
+
+        public static string GetCurrentAddress() {
+            return HttpContext.Current.Request.Url.Scheme + "://" + HttpContext.Current.Request.Url.Host;
         }
     }
 

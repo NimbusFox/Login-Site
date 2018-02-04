@@ -15,8 +15,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Login_Site</RootNamespace>
-    <AssemblyName>Login-Site</AssemblyName>
+    <RootNamespace>NimbusFox.Login_Site</RootNamespace>
+    <AssemblyName>NimbusFox.Login-Site</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -38,6 +38,19 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -309,19 +322,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SignalR.cs" />
+    <Compile Include="CodeLibraries\Core\ClassHelper.cs" />
     <Compile Include="CodeLibraries\Core\DatabaseHelper.cs" />
+    <Compile Include="CodeLibraries\Core\EmailHandlers\SystemEmailHandler.cs" />
     <Compile Include="CodeLibraries\Core\EventsHelper\DeletingEvents.cs" />
     <Compile Include="CodeLibraries\Core\EventsHelper\PublishedEvents.cs" />
     <Compile Include="CodeLibraries\Core\EventsHelper\SavingEvents.cs" />
     <Compile Include="CodeLibraries\Core\EventsHelper\TrashingEvents.cs" />
     <Compile Include="CodeLibraries\Core\EventsHelper\UnPublishingEvents.cs" />
     <Compile Include="CodeLibraries\Core\GlobalHelper.cs" />
+    <Compile Include="CodeLibraries\Core\MemberHandlers\RegistrationHandler.cs" />
     <Compile Include="CodeLibraries\Core\MembersHelper.cs" />
     <Compile Include="CodeLibraries\Core\PageHelper.cs" />
     <Compile Include="Controllers\Core\CoreAjaxController.cs" />
     <Compile Include="Controllers\Core\CoreContentBuilderController.cs" />
     <Compile Include="Controllers\Core\CoreCookiesController.cs" />
-    <Compile Include="CodeLibraries\Core\EventsIntercept.cs" />
+    <Compile Include="CodeLibraries\Core\EventsHelper\EventsIntercept.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -343,7 +359,7 @@
     <Compile Include="Models\Core\Page.cs" />
     <Compile Include="Models\Core\PageMaster.cs" />
     <Compile Include="Models\Core\Pages.cs" />
-    <Compile Include="Models\Core\Site.cs" />
+    <Compile Include="Models\Core\SiteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -426,6 +442,8 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.js" />
     <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -477,13 +495,17 @@
     <Content Include="Views\Shared\Core\Cookies.cshtml" />
     <Content Include="Views\Shared\Core\Footer.cshtml" />
     <Content Include="Views\Shared\Core\UserSection.cshtml" />
-    <Content Include="Views\Shared\Core\Content Builder\RegisterForm.cshtml" />
-    <Content Include="Views\Shared\Core\Content Builder\LoginForm.cshtml" />
+    <Content Include="Views\Shared\Core\AjaxForms\RegisterForm.cshtml" />
+    <Content Include="Views\Shared\Core\AjaxForms\LoginForm.cshtml" />
     <Content Include="Views\Shared\Core\ReCapture.cshtml" />
     <Content Include="Views\Shared\Core\Content Builder\LogoutDisplay.cshtml" />
+    <Content Include="Views\AjaxGateway.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\LoginForm.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\RegisterForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\LoginSystem\Core\" />
     <Folder Include="Views\CoreAjax\" />
     <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
@@ -499,6 +521,7 @@
     <TypeScriptCompile Include="Scripts\LoginSystem\global.ts" />
     <TypeScriptCompile Include="Scripts\typings\bootstrap\index.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\recaptcha\recaptcha.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
   </ItemGroup>
   <ItemGroup>

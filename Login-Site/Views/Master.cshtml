@@ -1,5 +1,6 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
-@using Login_Site.CodeLibraries.Core
+@using NimbusFox.Login_Site.CodeLibraries.Core
+@using NimbusFox.Login_Site.Models.Core
 @using ContentModels = Umbraco.Web.PublishedContentModels;
 
 @{
@@ -7,7 +8,7 @@
 
     var content = Model.Content;
 
-    var site = new Login_Site.Models.Core.Site(GlobalHelper.GetRoot());
+    var site = new SiteModel(GlobalHelper.GetRoot());
 
     var menu = site.Menu;
 

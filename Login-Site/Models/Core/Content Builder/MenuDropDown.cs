@@ -2,7 +2,7 @@
 using System.Linq;
 using Umbraco.Core.Models;
 
-namespace Login_Site.Models.Core.Content_Builder {
+namespace NimbusFox.Login_Site.Models.Core.Content_Builder {
     public class MenuDropDown {
         public string Text { get; set; }
         public List<IPublishedContent> Children { get; set; }

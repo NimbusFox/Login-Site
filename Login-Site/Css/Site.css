@@ -19,10 +19,7 @@
     /* To center horizontally */
     margin: 0 auto;
     pointer-events: all;
-}
-
-.modal {
-    z-index: 0 !important;
+    min-width: 440px;
 }
 
 .dropdown-submenu {
@@ -40,15 +37,9 @@
 }
 
 .modal-dialog {
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 140px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     overflow: auto;
-}
-
-@media(max-width: 768px) {
-    .modal-dialog {
-        min-height: calc(100vh - 20px);
-    }
 }

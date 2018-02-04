@@ -1,11 +1,11 @@
-﻿using Login_Site.CodeLibraries.Core.EventsHelper;
+﻿using NimbusFox.Login_Site.CodeLibraries.Core.EventsHelper;
 using Umbraco.Core;
 using Umbraco.Core.Events;
 using Umbraco.Core.Models;
 using Umbraco.Core.Publishing;
 using Umbraco.Core.Services;
 
-namespace Login_Site.CodeLibraries.Core {
+namespace NimbusFox.Login_Site.CodeLibraries.Core.EventsHelper {
     public class EventsIntercept : ApplicationEventHandler {
         public EventsIntercept() {
             ContentService.Saving += OnSave;
