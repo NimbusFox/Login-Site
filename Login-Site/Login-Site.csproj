@@ -309,20 +309,33 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SignalR.cs" />
-    <Compile Include="CodeLibraries\DatabaseHelper.cs" />
-    <Compile Include="CodeLibraries\GlobalHelper.cs" />
-    <Compile Include="CodeLibraries\MembersHelper.cs" />
-    <Compile Include="CodeLibraries\PageHelper.cs" />
+    <Compile Include="CodeLibraries\Core\DatabaseHelper.cs" />
+    <Compile Include="CodeLibraries\Core\EventsHelper\DeletingEvents.cs" />
+    <Compile Include="CodeLibraries\Core\EventsHelper\PublishedEvents.cs" />
+    <Compile Include="CodeLibraries\Core\EventsHelper\SavingEvents.cs" />
+    <Compile Include="CodeLibraries\Core\EventsHelper\TrashingEvents.cs" />
+    <Compile Include="CodeLibraries\Core\EventsHelper\UnPublishingEvents.cs" />
+    <Compile Include="CodeLibraries\Core\GlobalHelper.cs" />
+    <Compile Include="CodeLibraries\Core\MembersHelper.cs" />
+    <Compile Include="CodeLibraries\Core\PageHelper.cs" />
+    <Compile Include="Controllers\Core\CoreAjaxController.cs" />
     <Compile Include="Controllers\Core\CoreContentBuilderController.cs" />
-    <Compile Include="Controllers\Core\CookiesController.cs" />
+    <Compile Include="Controllers\Core\CoreCookiesController.cs" />
+    <Compile Include="CodeLibraries\Core\EventsIntercept.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Content Builder\Image.cs" />
-    <Compile Include="Models\Content Builder\Menu.cs" />
-    <Compile Include="Models\Content Builder\MenuDropDown.cs" />
-    <Compile Include="Models\Content Builder\MenuLink.cs" />
-    <Compile Include="Models\Content Builder\MenuSubDropDown.cs" />
+    <Compile Include="Models\Core\AjaxForms\AjaxForm.cs" />
+    <Compile Include="Models\Core\AjaxForms\Login.cs" />
+    <Compile Include="Models\Core\AjaxForms\Register.cs" />
+    <Compile Include="Models\Core\Content Builder\Image.cs" />
+    <Compile Include="Models\Core\Content Builder\LoginForm.cs" />
+    <Compile Include="Models\Core\Content Builder\LogoutDisplay.cs" />
+    <Compile Include="Models\Core\Content Builder\Menu.cs" />
+    <Compile Include="Models\Core\Content Builder\MenuDropDown.cs" />
+    <Compile Include="Models\Core\Content Builder\MenuLink.cs" />
+    <Compile Include="Models\Core\Content Builder\MenuSubDropDown.cs" />
+    <Compile Include="Models\Core\Content Builder\RegisterForm.cs" />
     <Compile Include="Models\Core\GoogleServices.cs" />
     <Compile Include="Models\Core\Gresult.cs" />
     <Compile Include="Models\Core\ItemVisibility.cs" />
@@ -463,9 +476,15 @@
     <Content Include="Views\Shared\Core\Content Builder\MenuSubDropDown.cshtml" />
     <Content Include="Views\Shared\Core\Cookies.cshtml" />
     <Content Include="Views\Shared\Core\Footer.cshtml" />
+    <Content Include="Views\Shared\Core\UserSection.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\RegisterForm.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\LoginForm.cshtml" />
+    <Content Include="Views\Shared\Core\ReCapture.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\LogoutDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CoreAjax\" />
     <Folder Include="Views\MacroPartials\" />
   </ItemGroup>
   <ItemGroup>

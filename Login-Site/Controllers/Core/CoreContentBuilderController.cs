@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Login_Site.CodeLibraries;
-using Login_Site.Models;
-using Login_Site.Models.Core.ContentBuilder;
+using Login_Site.CodeLibraries.Core;
 using Login_Site.Models.Core;
-using umbraco;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
+using Login_Site.Models.Core.Content_Builder;
 
 namespace Login_Site.Controllers.Core {
     public class CoreContentBuilderController : SurfaceController {
@@ -43,6 +40,22 @@ namespace Login_Site.Controllers.Core {
 
         public ActionResult Page(IPublishedContent page) {
             return PartialView("Core/Page", new Page(page));
+        }
+
+        public ActionResult UserSection() {
+            return PartialView("Core/UserSection");
+        }
+
+        public ActionResult LoginForm(IPublishedContent page) {
+            return PartialView("Core/Content Builder/LoginForm", new LoginForm(page));
+        }
+
+        public ActionResult RegisterForm(IPublishedContent page) {
+            return PartialView("Core/Content Builder/RegisterForm", new RegisterForm(page));
+        }
+
+        public ActionResult LogoutDisplay(IPublishedContent page) {
+            return PartialView("Core/Content Builder/LogoutDisplay", new LogoutDisplay(page));
         }
     }
 }

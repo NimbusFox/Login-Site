@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
-using System.Web.Hosting;
-using Login_Site.Models;
 using Login_Site.Models.Core;
 using Newtonsoft.Json;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.CodeLibraries {
+namespace Login_Site.CodeLibraries.Core {
     public static class GlobalHelper {
 
         public static string ContentBuilder {
@@ -26,6 +23,15 @@ namespace Login_Site.CodeLibraries {
                 }
 
                 return "CoreContentBuilder";
+            }
+        }
+
+        public static bool HasValidReCaptcha {
+            get {
+                var site = new Site(GetRoot());
+
+                return !site.GoogleServices.ReCaptchaSiteKey.IsNullOrWhiteSpace() &&
+                       !site.GoogleServices.ReCaptchaPrivateKey.IsNullOrWhiteSpace();
             }
         }
 
@@ -56,6 +62,10 @@ namespace Login_Site.CodeLibraries {
         }
 
         public static bool ValidRecaptcha(string response, string ip = "") {
+            if (!HasValidReCaptcha) {
+                return true;
+            }
+
             using (var client = new WebClient()) {
 
                 var gresponse =
@@ -84,16 +94,12 @@ namespace Login_Site.CodeLibraries {
             return ip;
         }
 
-        public static string GetGResponse() {
+        public static string GetGoogleRecaptureResponse() {
             if (HttpContext.Current.Request.QueryString.AllKeys.Any(x => x == "g-recaptcha-response")) {
                 return HttpContext.Current.Request.QueryString["g-recaptcha-response"];
             }
 
-            if (HttpContext.Current.Request.Form.AllKeys.Any(x => x == "g-recaptcha-response")) {
-                return HttpContext.Current.Request.Form["g-recaptcha-response"];
-            }
-
-            return "";
+            return HttpContext.Current.Request.Form.AllKeys.Any(x => x == "g-recaptcha-response") ? HttpContext.Current.Request.Form["g-recaptcha-response"] : "";
         }
 
         public static string RenderEmail(Dictionary<string, string> keys, string email) {
@@ -154,7 +160,7 @@ namespace Login_Site.CodeLibraries {
             }
         }
 
-        public static string CookieText() {
+        public static string CookieAcceptanceValue() {
             return true.ToString();
         }
     }

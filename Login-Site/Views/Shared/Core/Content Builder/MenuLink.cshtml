@@ -1,6 +1,5 @@
-﻿@using Login_Site.Models
-@using Login_Site.Models.Core
-@model Login_Site.Models.Core.ContentBuilder.MenuLink
+﻿@using Login_Site.Models.Core
+@model Login_Site.Models.Core.Content_Builder.MenuLink
 @if (Model.Visibility != EItemVisibility.None) {
      if (Model.Parent == "menuDropDown" || Model.Parent == "menuSubDropDown") {
          <a class="dropdown-item" tabindex="-1" href="@Model.Url"@Html.Raw(Model.NewPage ? " target=\"_blank\"" : "")>@Model.Text</a>

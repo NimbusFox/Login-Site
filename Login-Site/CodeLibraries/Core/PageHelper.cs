@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.CodeLibraries {
+namespace Login_Site.CodeLibraries.Core {
     public static class PageHelper {
         public static string PageTitle(IPublishedContent page) {
             var current = page.GetPropertyValue<string>("title", page.Name);

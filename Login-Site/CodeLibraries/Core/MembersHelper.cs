@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Web;
+using Login_Site.Models.Core;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Security;
 
-namespace Login_Site.CodeLibraries {
+namespace Login_Site.CodeLibraries.Core {
     public static class MembersHelper {
         public static bool IsLoggedIn {
             get {
@@ -28,13 +27,6 @@ namespace Login_Site.CodeLibraries {
             var currentBanned = GlobalHelper.GetRoot().FirstChild("blockedEmails");
 
             emails.AddRange(currentBanned.Children.Select(x => x.Name).Where(x => !emails.Contains(x)));
-
-            for (var i = 0; i < emails.Count; i++) {
-                var text = emails[i];
-                if (text.Contains("*")) {
-                    emails[i] = text.Replace("*", "(.*?)");
-                }
-            }
 
             return emails.Select(vEmail => new Regex(vEmail)).Any(reg => reg.IsMatch(email));
         }
@@ -63,13 +55,6 @@ namespace Login_Site.CodeLibraries {
             var currentBanned = GlobalHelper.GetRoot().FirstChild("blockedNames");
 
             names.AddRange(currentBanned.Children.Select(x => x.Name).Where(x => !names.Contains(x)));
-
-            for (var i = 0; i < names.Count; i++) {
-                var text = names[i];
-                if (text.Contains("*")) {
-                    names[i] = text.Replace("*", "(.*?)");
-                }
-            }
 
             return names.Select(vEmail => new Regex(vEmail)).Any(reg => reg.IsMatch(name));
         }
@@ -110,6 +95,12 @@ namespace Login_Site.CodeLibraries {
             }
 
             return value.AddMinutes(time.Value);
+        }
+
+        public static string GetUserUrl(int memberId) {
+            var pages = new Pages();
+
+            return pages.UserPage.UrlWithDomain() + "?id=" + memberId;
         }
     }
 

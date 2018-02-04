@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace Login_Site.Models.Core.ContentBuilder {
+namespace Login_Site.Models.Core.Content_Builder {
     public class Menu {
         public string Title { get; set; }
         public bool FullWidth { get; set; }

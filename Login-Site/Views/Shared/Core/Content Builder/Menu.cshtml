@@ -1,5 +1,5 @@
-﻿@using Login_Site.CodeLibraries
-@model Login_Site.Models.Core.ContentBuilder.Menu
+﻿@using Login_Site.CodeLibraries.Core
+@model Login_Site.Models.Core.Content_Builder.Menu
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
     <div class="container@(Model.FullWidth ? "-fluid" : "")">
         <a href="@GlobalHelper.GetRoot(UmbracoContext.Current.PageId.Value).UrlWithDomain()" class="navbar-brand">@Model.Title</a>
@@ -12,6 +12,7 @@
                     @Html.Action(child.DocumentTypeAlias, GlobalHelper.ContentBuilder, new { page = child })
                 }
             </ul>
+            @{Html.RenderAction("UserSection", GlobalHelper.ContentBuilder);}
         </div>
     </div>
 </nav>

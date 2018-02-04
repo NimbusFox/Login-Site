@@ -1,0 +1,25 @@
+﻿@using Login_Site.CodeLibraries.Core
+@using Login_Site.Models.Core
+@using Umbraco.Web.Security
+@{
+    var pages = new Pages();
+    var site = GlobalHelper.GetRoot();
+
+    var login = (pages.LoginPage ?? site).UrlWithDomain();
+    var register = (pages.RegisterPage ?? site).UrlWithDomain();
+    var logout = (pages.LogoutPage ?? site).UrlWithDomain();
+}
+<ul class="nav navbar-nav">
+    @if (!MembersHelper.IsLoggedIn) {
+        <li class="nav-item"><a class="nav-link" tabindex="-1" href="@register">Register</a></li>
+        <li class="nav-item"><a class="nav-link" tabindex="-1" href="@login">Login</a></li>
+    } else {
+        <li class="nav-item dropdown">
+            <a data-toggle="dropdown" aira-expanded="false" class="nav-link dropdown-toggle" id="UserSection" href="#">@(new MembershipHelper(UmbracoContext.Current).CurrentUserName)<span class="caret"></span></a>
+            <div class="dropdown-menu" aria-labelledby="UserSection">
+                <a class="dropdown-item" href="@MembersHelper.GetUserUrl(new MembershipHelper(UmbracoContext.Current).GetCurrentMemberId())">Site Profile</a>
+                <a class="dropdown-item" href="@logout">Logout</a>
+            </div>
+        </li>
+    }
+</ul>
