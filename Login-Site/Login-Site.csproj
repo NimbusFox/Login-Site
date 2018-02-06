@@ -323,6 +323,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SignalR.cs" />
     <Compile Include="CodeLibraries\Core\ClassHelper.cs" />
+    <Compile Include="CodeLibraries\Core\ContentHelper.cs" />
     <Compile Include="CodeLibraries\Core\DatabaseHelper.cs" />
     <Compile Include="CodeLibraries\Core\EmailHandlers\SystemEmailHandler.cs" />
     <Compile Include="CodeLibraries\Core\EventsHelper\DeletingEvents.cs" />
@@ -344,6 +345,8 @@
     <Compile Include="Models\Core\AjaxForms\AjaxForm.cs" />
     <Compile Include="Models\Core\AjaxForms\Login.cs" />
     <Compile Include="Models\Core\AjaxForms\Register.cs" />
+    <Compile Include="Models\Core\Content Builder\Container.cs" />
+    <Compile Include="Models\Core\Content Builder\Content.cs" />
     <Compile Include="Models\Core\Content Builder\Image.cs" />
     <Compile Include="Models\Core\Content Builder\LoginForm.cs" />
     <Compile Include="Models\Core\Content Builder\LogoutDisplay.cs" />
@@ -385,7 +388,6 @@
     <Content Include="config\Lang\ru-RU.user.xml" />
     <Content Include="config\Lang\sv-SE.user.xml" />
     <Content Include="config\Lang\zh-CN.user.xml" />
-    <Content Include="Content\Site.css" />
     <Content Include="Css\bootstrap.css" />
     <Content Include="default.aspx" />
     <Content Include="favicon.ico" />
@@ -502,9 +504,17 @@
     <Content Include="Views\AjaxGateway.cshtml" />
     <Content Include="Views\Shared\Core\Content Builder\LoginForm.cshtml" />
     <Content Include="Views\Shared\Core\Content Builder\RegisterForm.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\Container.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\Content.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\Containers\CenteredDialog.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\Containers\Dialog.cshtml" />
+    <Content Include="Views\Shared\Core\Content Builder\Containers\Jumbotron.cshtml" />
+    <Content Include="Views\Shared\Core\Header.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\" />
+    <Folder Include="Models\Core\Content Builder\Containers\" />
     <Folder Include="Scripts\LoginSystem\Core\" />
     <Folder Include="Views\CoreAjax\" />
     <Folder Include="Views\MacroPartials\" />

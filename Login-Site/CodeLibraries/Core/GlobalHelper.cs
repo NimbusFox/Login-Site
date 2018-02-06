@@ -3,8 +3,10 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Mvc;
 using NimbusFox.Login_Site.Models.Core;
 using Newtonsoft.Json;
 using Umbraco.Core;
@@ -36,6 +38,31 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
 
                 return "CoreAjax";
             }
+        }
+
+        public static string AjaxGatewayUrl(string call, Dictionary<string, string> data) {
+            var queryString = new StringBuilder();
+
+            foreach (var pair in data) {
+                if (!queryString.ToString().IsNullOrWhiteSpace()) {
+                    queryString.Append("&");
+                }
+
+                queryString.Append(pair.Key);
+                queryString.Append("=");
+                queryString.Append(pair.Value);
+            }
+
+            var root = GetRoot();
+            if (root.Children.Any(x => x.DocumentTypeAlias.ToLower() == "ajaxgateway")) {
+                return root.FirstChild("ajaxGateway").UrlWithDomain() + "?call=" + call + "&" + queryString;
+            }
+
+            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            var url = GetCurrentAddress() +
+                      urlHelper.Action(call, AjaxGateway) + queryString;
+
+            return url;
         }
 
         public static bool HasValidReCaptcha {

@@ -1,44 +1,40 @@
 ﻿@using NimbusFox.Login_Site.CodeLibraries.Core
 @using NimbusFox.Login_Site.Models.Core.AjaxForms
 @model NimbusFox.Login_Site.Models.Core.AjaxForms.Register
-<div class="modal-dialog" id="RegisterForm">
-    <div class="modal-content">
-        <div class="modal-body">
-            @using (Ajax.BeginForm("Register", GlobalHelper.AjaxGateway, null, new AjaxOptions { InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "RegisterForm", HttpMethod = "post", OnComplete = "refreshScripts();" })) {
-                <div class="h4">Register</div>
-                <div class="form-group@(Model.GetError(Model.GetName(x => x.Username)).IsNullOrWhiteSpace() ? "" : " has-danger")">
-                    @Html.TextBoxFor(model => model.Username, new { placeholder = Model.GetLabel(Model.GetName(x => x.Username)), @class = "form-control" })
-                    @if (!Model.GetError(Model.GetName(x => x.Username)).IsNullOrWhiteSpace()) {
-                        <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.Username)))</div>
-                    }
-                </div>
-                <div class="form-group@(Model.GetError(Model.GetName(x => x.Email)).IsNullOrWhiteSpace() ? "" : " has-danger")">
-                    @Html.TextBoxFor(model => model.Email, new { placeholder = Model.GetLabel(Model.GetName(x => x.Email)), @class = "form-control", type = "email" })
-                    @if (!Model.GetError(Model.GetName(x => x.Email)).IsNullOrWhiteSpace()) {
-                        <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.Email)))</div>
-                    }
-                </div>
-                <div class="form-group@(Model.GetError(Model.GetName(x => x.DateOfBirth)).IsNullOrWhiteSpace() ? "" : " has-danger")">
-                    @Html.TextBoxFor(model => model.DateOfBirth, new Dictionary<string, object> { { "placeholder", Model.GetLabel(Model.GetName(x => x.DateOfBirth)) }, { "class", "form-control" }, { "type", "date" }, { "min", DateTime.Today.AddYears(-100).ToString("yyyy-MM-dd") }, { "max", DateTime.Today.AddYears(-10).ToString("yyyy-MM-dd") } })
-                    @if (!Model.GetError(Model.GetName(x => x.DateOfBirth)).IsNullOrWhiteSpace()) {
-                        <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.DateOfBirth)))</div>
-                    }
-                </div>
-                <div class="form-group@(Model.GetError(Model.GetName(x => x.Password)).IsNullOrWhiteSpace() ? "" : " has-danger")">
-                    @Html.TextBoxFor(model => model.Password, new { placeholder = Model.GetLabel(Model.GetName(x => x.Password)), @class = "form-control", type = "password", value = "" })
-                    @if (!Model.GetError(Model.GetName(x => x.Password)).IsNullOrWhiteSpace()) {
-                        <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.Password)))</div>
-                    }
-                </div>
-                <div class="form-group@(Model.GetError(Model.GetName(x => x.ConfirmPassword)).IsNullOrWhiteSpace() ? "" : " has-danger")">
-                    @Html.TextBoxFor(model => model.ConfirmPassword, new { placeholder = Model.GetLabel(Model.GetName(x => x.ConfirmPassword)), @class = "form-control", type = "password", value = "" })
-                    @if (!Model.GetError(Model.GetName(x => x.ConfirmPassword)).IsNullOrWhiteSpace()) {
-                        <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.ConfirmPassword)))</div>
-                    }
-                </div>
-                Html.RenderPartial("Core/ReCapture");
-                <input class="btn btn-success" type="submit" value="Register" />
+<div id="RegisterForm">
+    @using (Ajax.BeginForm(new AjaxOptions { InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "RegisterForm", HttpMethod = "post", OnComplete = "refreshScripts();", Url = GlobalHelper.AjaxGatewayUrl("register", new Dictionary<string, string>()) })) {
+        <div class="h4">Register</div>
+        <div class="form-group@(Model.GetError(Model.GetName(x => x.Username)).IsNullOrWhiteSpace() ? "" : " has-danger")">
+            @Html.TextBoxFor(model => model.Username, new { placeholder = Model.GetLabel(Model.GetName(x => x.Username)), @class = "form-control" })
+            @if (!Model.GetError(Model.GetName(x => x.Username)).IsNullOrWhiteSpace()) {
+                <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.Username)))</div>
             }
         </div>
-    </div>
+        <div class="form-group@(Model.GetError(Model.GetName(x => x.Email)).IsNullOrWhiteSpace() ? "" : " has-danger")">
+            @Html.TextBoxFor(model => model.Email, new { placeholder = Model.GetLabel(Model.GetName(x => x.Email)), @class = "form-control", type = "email" })
+            @if (!Model.GetError(Model.GetName(x => x.Email)).IsNullOrWhiteSpace()) {
+                <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.Email)))</div>
+            }
+        </div>
+        <div class="form-group@(Model.GetError(Model.GetName(x => x.DateOfBirth)).IsNullOrWhiteSpace() ? "" : " has-danger")">
+            @Html.TextBoxFor(model => model.DateOfBirth, new Dictionary<string, object> { { "placeholder", Model.GetLabel(Model.GetName(x => x.DateOfBirth)) }, { "class", "form-control" }, { "type", "date" }, { "min", DateTime.Today.AddYears(-100).ToString("yyyy-MM-dd") }, { "max", DateTime.Today.AddYears(-10).ToString("yyyy-MM-dd") } })
+            @if (!Model.GetError(Model.GetName(x => x.DateOfBirth)).IsNullOrWhiteSpace()) {
+                <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.DateOfBirth)))</div>
+            }
+        </div>
+        <div class="form-group@(Model.GetError(Model.GetName(x => x.Password)).IsNullOrWhiteSpace() ? "" : " has-danger")">
+            @Html.TextBoxFor(model => model.Password, new { placeholder = Model.GetLabel(Model.GetName(x => x.Password)), @class = "form-control", type = "password", value = "" })
+            @if (!Model.GetError(Model.GetName(x => x.Password)).IsNullOrWhiteSpace()) {
+                <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.Password)))</div>
+            }
+        </div>
+        <div class="form-group@(Model.GetError(Model.GetName(x => x.ConfirmPassword)).IsNullOrWhiteSpace() ? "" : " has-danger")">
+            @Html.TextBoxFor(model => model.ConfirmPassword, new { placeholder = Model.GetLabel(Model.GetName(x => x.ConfirmPassword)), @class = "form-control", type = "password", value = "" })
+            @if (!Model.GetError(Model.GetName(x => x.ConfirmPassword)).IsNullOrWhiteSpace()) {
+                <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.ConfirmPassword)))</div>
+            }
+        </div>
+        Html.RenderPartial("Core/ReCapture");
+        <input class="btn btn-success" type="submit" value="Register" />
+    }
 </div>

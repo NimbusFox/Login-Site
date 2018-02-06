@@ -57,5 +57,25 @@ namespace NimbusFox.Login_Site.Controllers.Core {
         public ActionResult LogoutDisplay(IPublishedContent page) {
             return PartialView("Core/Content Builder/LogoutDisplay", new LogoutDisplay(page));
         }
+
+        public ActionResult Container(IPublishedContent page) {
+            return PartialView("Core/Content Builder/Container", new Container(page));
+        }
+
+        public ActionResult Content(IPublishedContent page) {
+            return PartialView("Core/Content Builder/Content", new Models.Core.Content_Builder.Content(page));
+        }
+
+        public ActionResult CenteredDialog(IPublishedContent page) {
+            return PartialView("Core/Content Builder/Containers/CenteredDialog", page);
+        }
+
+        public ActionResult Dialog(IPublishedContent page) {
+            return PartialView("Core/Content Builder/Containers/Dialog", page);
+        }
+
+        public ActionResult Jumbotron(IPublishedContent page) {
+            return PartialView("Core/Content Builder/Containers/Jumbotron", page);
+        }
     }
 }

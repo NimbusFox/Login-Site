@@ -17,14 +17,15 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.EmailHandlers {
 
             var replace = new Dictionary<string, string>();
 
-            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            var verificationUrl = GlobalHelper.AjaxGatewayUrl("validate", new Dictionary<string, string> {
+                {"id", newMember.Id.ToString()},
+                {"vc", newMember.GetValue("validationCode").ToString()}
+            });
 
             replace.Add("username", newMember.Username);
             replace.Add("sitename", site.Page.Name);
             replace.Add("date_time_registered", DateTime.Now.ToString());
-            replace.Add("validation_link",
-                GlobalHelper.GetCurrentAddress() + urlHelper.Action("validate", GlobalHelper.AjaxGateway) +
-                $"?id={newMember.Id}&vc={newMember.GetValue("validationCode")}");
+            replace.Add("validation_link", $"<a href=\"{verificationUrl}\">{verificationUrl}</a>");
 
             foreach (var key in replace.Keys) {
                 if (registration.Message.ToHtmlString().Contains($"${key}")) {

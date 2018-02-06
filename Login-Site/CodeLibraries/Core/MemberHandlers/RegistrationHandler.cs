@@ -91,5 +91,10 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers {
 
             ms.Save(member);
         }
+
+        public static bool ValidateRegistration(string id, string validationCode) {
+
+            return false;
+        }
     }
 }

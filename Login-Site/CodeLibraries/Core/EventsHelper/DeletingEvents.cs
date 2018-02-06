@@ -9,6 +9,15 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.EventsHelper {
 
             foreach (var entity in entities) {
                 if (!deleteEventArgs.Cancel) {
+                    AjaxGatewayCheck(entity, deleteEventArgs);
+                }
+            }
+        }
+
+        private static void AjaxGatewayCheck(IContent entity, DeleteEventArgs<IContent> eventArgs) {
+            if (!eventArgs.Cancel) {
+                if (entity.ContentType.Alias.ToLower() == "ajaxgateway") {
+                    eventArgs.CancelOperation(new EventMessage("Unable to delete", "You cannot delete an Ajax Gateway", EventMessageType.Error));
                 }
             }
         }

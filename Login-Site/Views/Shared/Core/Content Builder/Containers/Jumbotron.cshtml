@@ -1,0 +1,7 @@
+﻿@using NimbusFox.Login_Site.CodeLibraries.Core
+@model IPublishedContent
+<div class="jumbotron">
+    @foreach (var child in Model.Children) {
+        Html.RenderAction(child.DocumentTypeAlias, GlobalHelper.ContentBuilder, new { page = child });
+    }
+</div>

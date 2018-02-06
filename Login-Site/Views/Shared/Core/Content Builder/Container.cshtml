@@ -1,0 +1,3 @@
+﻿@using NimbusFox.Login_Site.CodeLibraries.Core
+@model NimbusFox.Login_Site.Models.Core.Content_Builder.Container
+@{Html.RenderAction(Model.Type, GlobalHelper.ContentBuilder, new { page = Model.Page });}

@@ -46,13 +46,17 @@
         <script src="https://www.google.com/recaptcha/api.js"></script>
     }
 </head>
-    <body>
-        <div class="body-content container">
-            @{Html.RenderAction(content.DocumentTypeAlias, GlobalHelper.ContentBuilder, new { page = content });}
-            @{Html.RenderAction("Cookies", GlobalHelper.ContentBuilder);}
-        </div>
-        @if (menu != null) {
-            Html.RenderAction("Menu", GlobalHelper.ContentBuilder, new { page = menu });
-        }
-    </body>
+<body>
+    <div class="body-content container">
+        @{Html.RenderAction(content.DocumentTypeAlias, GlobalHelper.ContentBuilder, new { page = content });}
+        @{Html.RenderAction("Cookies", GlobalHelper.ContentBuilder);}
+    </div>
+    @if (menu != null) {
+        Html.RenderAction("Menu", GlobalHelper.ContentBuilder, new { page = menu });
+    }
+
+    @*This can be removed but you will not get support on github if this has been removed  ---REMOVEABLE---*@
+    <!--This site is based on Nimbus Fox's login system https://github.com/NimbusFox/Login-Site Copyright 2018-->
+    @*---REMOVEABLE---*@
+</body>
 </html>

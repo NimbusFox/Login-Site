@@ -1,6 +1,10 @@
 ﻿@using NimbusFox.Login_Site.CodeLibraries.Core
-@*This can be removed but you will not get support on github if this has been removed  ---REMOVEABLE---*@
-<!--This site is based on Nimbus Fox's login system https://github.com/NimbusFox/Login-Site Copyright 2018-->
-@*---REMOVEABLE---*@
+@model NimbusFox.Login_Site.Models.Core.Page
+<footer>
+    @if (Model.DisplayEditedTime) {
+        var latestEdit = GlobalHelper.GetLatestEdit(Model.Page);
+        <div>Page edited: @latestEdit.UpdateDate.ToString("dd/MM/yyyy h:mm:ss tt") by @latestEdit.WriterName</div><br />
+    }
 
-Copyright @GlobalHelper.GetRoot().Name @DateTime.Now.Year
+    Copyright @GlobalHelper.GetRoot().Name @DateTime.Now.Year
+</footer>
