@@ -47,8 +47,9 @@
     }
 </head>
 <body>
-    <div class="body-content container">
-        @{Html.RenderAction(content.DocumentTypeAlias, GlobalHelper.ContentBuilder, new { page = content });}
+    <div class="body-content container" >
+        
+        @{Html.RenderAction(content.DocumentTypeAlias, GlobalHelper.ContentBuilder, new {page = content});}
         @{Html.RenderAction("Cookies", GlobalHelper.ContentBuilder);}
     </div>
     @if (menu != null) {
@@ -56,7 +57,7 @@
     }
 
     @*This can be removed but you will not get support on github if this has been removed  ---REMOVEABLE---*@
-    <!--This site is based on Nimbus Fox's login system https://github.com/NimbusFox/Login-Site Copyright 2018-->
+    <!--This site is based on Nimbus Fox's login system https://github.com/NimbusFox/Login-Site Copyright @DateTime.Now.Year-->
     @*---REMOVEABLE---*@
 </body>
 </html>

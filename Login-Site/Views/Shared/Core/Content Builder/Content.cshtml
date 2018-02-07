@@ -1,2 +1,6 @@
 ﻿@using NimbusFox.Login_Site.CodeLibraries.Core
 @model NimbusFox.Login_Site.Models.Core.Content_Builder.Content
+@{
+    Model.ParseVariables();
+}
+@Model.GetHtml()

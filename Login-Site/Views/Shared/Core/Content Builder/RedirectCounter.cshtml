@@ -1,0 +1,10 @@
+﻿@using NimbusFox.Login_Site.CodeLibraries.Core
+@model NimbusFox.Login_Site.Models.Core.Content_Builder.RedirectCounter
+@{
+    var destination = Model.Page == null ? GlobalHelper.GetRoot().UrlWithDomain() : Model.Page.UrlWithDomain();
+}
+<script>
+    setTimeout(function() {
+        document.location.href = "@destination";
+    }, @(1000 * Model.Seconds));
+</script>

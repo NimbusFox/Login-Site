@@ -4,11 +4,11 @@
     Layout = null;
 
     if (Request.QueryString.HasKeys()) {
-        if (Request.QueryString.AllKeys.Select(key => key.ToLower()).Contains("call")) {
+        if (Request.QueryString.HasKey("call")) {
             try {
-                Html.RenderAction(Request.QueryString[Request.QueryString.AllKeys.First(key => key.ToLower() == "call")], GlobalHelper.AjaxGateway);
+                Html.RenderAction(Request.QueryString.GetValue("call"), GlobalHelper.AjaxGateway);
             } catch (Exception ex) {
-                if (ex.InnerException is HttpException) {
+                if (ex.HasExceptionOtherThan(typeof(HttpException))) {
                     // Will ignore errors that say a certain function doesn't exist
                 } else {
                     throw;

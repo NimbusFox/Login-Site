@@ -17,12 +17,6 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
             return IsLoggedIn ? Ms.GetCurrentMemberId() : 0;
         }
 
-        public static string GetUserUrl(int memberId) {
-            var pages = new Pages();
-
-            return pages.UserPage.UrlWithDomain() + "?id=" + memberId;
-        }
-
         public static IMember GetCurrentMember() {
             return IsLoggedIn ? ApplicationContext.Current.Services.MemberService.GetById(GetCurrentMemberId()) : null;
         }

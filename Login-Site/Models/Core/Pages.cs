@@ -10,18 +10,16 @@ namespace NimbusFox.Login_Site.Models.Core {
         public IPublishedContent LoginPage { get; }
         public IPublishedContent LogoutPage { get; }
         public IPublishedContent RegisterPage { get; }
-        public IPublishedContent UserPage { get; }
+        private readonly List<IPublishedContent> _defaultVal = new List<IPublishedContent>();
 
         public Pages() {
             var root = GlobalHelper.GetRoot();
 
-            var defaultVal = new List<IPublishedContent>();
 
-            HomePage = root.GetPropertyValue("homePage", defaultVal).FirstOrDefault();
-            LoginPage = root.GetPropertyValue("loginPage", defaultVal).FirstOrDefault();
-            LogoutPage = root.GetPropertyValue("logoutPage", defaultVal).FirstOrDefault();
-            RegisterPage = root.GetPropertyValue("registerPage", defaultVal).FirstOrDefault();
-            UserPage = root.GetPropertyValue("userPage", defaultVal).FirstOrDefault();
+            HomePage = root.GetPropertyValue("homePage", _defaultVal).FirstOrDefault();
+            LoginPage = root.GetPropertyValue("loginPage", _defaultVal).FirstOrDefault();
+            LogoutPage = root.GetPropertyValue("logoutPage", _defaultVal).FirstOrDefault();
+            RegisterPage = root.GetPropertyValue("registerPage", _defaultVal).FirstOrDefault();
         }
     }
 }

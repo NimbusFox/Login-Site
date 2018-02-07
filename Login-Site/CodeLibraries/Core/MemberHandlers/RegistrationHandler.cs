@@ -5,6 +5,8 @@ using System.Web;
 using NimbusFox.Login_Site.Models.Core.AjaxForms;
 using Umbraco.Core;
 using Umbraco.Core.Models;
+using Umbraco.Web;
+using Umbraco.Web.Security;
 using DateTime = System.DateTime;
 
 namespace NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers {
@@ -55,7 +57,7 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers {
             return data;
         }
 
-        public static void PasswordValidation(Register data, out bool pValid) {
+        private static void PasswordValidation(Register data, out bool pValid) {
             var password = data.Password;
             var specialCharacters = new List<char> { '!', '"', '£', '$', '%', '^', '&', '*', '(', ')', '@', '#', '~', '[', ']', '{', '}', '?', '/', '\\', '|', '-', '_', '=', '+', '`', '¬' };
             int temp;
@@ -93,8 +95,40 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers {
         }
 
         public static bool ValidateRegistration(string id, string validationCode) {
+            var ms = ApplicationContext.Current.Services.MemberService;
 
-            return false;
+            int mId;
+
+            if (!int.TryParse(id, out mId)) {
+                return false;
+            }
+
+            var member = ms.GetById(mId);
+
+            if (member == null) {
+                return false;
+            }
+
+            if (member.GetValue<bool>("validated")) {
+                return false;
+            }
+
+            var vc = member.GetValue<string>("validationCode");
+
+            if (vc.IsNullOrWhiteSpace()) {
+                return false;
+            }
+
+            if (validationCode != vc) {
+                return false;
+            }
+
+            member.SetValue("validated", true);
+            member.SetValue("validationCode", "");
+
+            AddUpdateMember(member);
+
+            return true;
         }
     }
 }

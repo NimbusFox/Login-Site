@@ -4,7 +4,10 @@ using System.Web.Mvc;
 using NimbusFox.Login_Site.CodeLibraries.Core;
 using NimbusFox.Login_Site.CodeLibraries.Core.EmailHandlers;
 using NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers;
+using NimbusFox.Login_Site.Models.Core;
 using NimbusFox.Login_Site.Models.Core.AjaxForms;
+using Umbraco.Core.Models;
+using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace NimbusFox.Login_Site.Controllers.Core {
@@ -21,6 +24,10 @@ namespace NimbusFox.Login_Site.Controllers.Core {
                         var member = RegistrationHandler.CreateMember(register);
                         RegistrationHandler.AddUpdateMember(member);
                         SystemEmailHandler.RegistrationEmail(member);
+
+                        var gateway = new AjaxGateway();
+
+                        return PartialView("Core/Page", new Page(gateway.SuccessfulAccountRegistration));
                     }
                 }
             }
@@ -40,10 +47,19 @@ namespace NimbusFox.Login_Site.Controllers.Core {
                     queryString.HasKey("vc")) {
                     var id = queryString.GetValue("id");
                     var vc = queryString.GetValue("vc");
+
+                    var gateway = new AjaxGateway();
+
                     if (RegistrationHandler.ValidateRegistration(id, vc)) {
-
+                        if (gateway.SuccessfulAccountActivation != null) {
+                            return PartialView("~/Views/Master.cshtml",
+                                new RenderModel<IPublishedContent>(gateway.SuccessfulAccountActivation));
+                        }
                     } else {
-
+                        if (gateway.FailedAccountActivation != null) {
+                            return PartialView("~/Views/Master.cshtml",
+                                new RenderModel<IPublishedContent>(gateway.FailedAccountActivation));
+                        }
                     }
                 }
             }

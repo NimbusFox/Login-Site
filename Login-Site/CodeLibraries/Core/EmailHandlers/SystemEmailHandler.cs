@@ -13,7 +13,7 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.EmailHandlers {
         public static void RegistrationEmail(IMember newMember) {
             var site = new SiteModel(GlobalHelper.GetRoot());
             var registration =
-                new RegisterForm(site.Pages.RegisterPage.FirstChild("registerForm"));
+                new RegisterForm(site.Pages.RegisterPage.Descendant("registerForm"));
 
             var replace = new Dictionary<string, string>();
 
@@ -24,7 +24,7 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.EmailHandlers {
 
             replace.Add("username", newMember.Username);
             replace.Add("sitename", site.Page.Name);
-            replace.Add("date_time_registered", DateTime.Now.ToString());
+            replace.Add("date_time_registered", DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss tt"));
             replace.Add("validation_link", $"<a href=\"{verificationUrl}\">{verificationUrl}</a>");
 
             foreach (var key in replace.Keys) {

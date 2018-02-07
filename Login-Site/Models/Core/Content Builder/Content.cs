@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NimbusFox.Login_Site.CodeLibraries.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
@@ -22,7 +23,7 @@ namespace NimbusFox.Login_Site.Models.Core.Content_Builder {
         }
 
         public void ParseVariables() {
-
+            Text = ContentHelper.ParseText(Text);
         }
     }
 }

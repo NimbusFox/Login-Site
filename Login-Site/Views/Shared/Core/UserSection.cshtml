@@ -17,7 +17,6 @@
         <li class="nav-item dropdown">
             <a data-toggle="dropdown" aira-expanded="false" class="nav-link dropdown-toggle" id="UserSection" href="#">@(new MembershipHelper(UmbracoContext.Current).CurrentUserName)<span class="caret"></span></a>
             <div class="dropdown-menu" aria-labelledby="UserSection">
-                <a class="dropdown-item" href="@MembersHelper.GetUserUrl(new MembershipHelper(UmbracoContext.Current).GetCurrentMemberId())">Site Profile</a>
                 <a class="dropdown-item" href="@logout">Logout</a>
             </div>
         </li>

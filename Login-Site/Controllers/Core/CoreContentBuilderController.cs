@@ -77,5 +77,9 @@ namespace NimbusFox.Login_Site.Controllers.Core {
         public ActionResult Jumbotron(IPublishedContent page) {
             return PartialView("Core/Content Builder/Containers/Jumbotron", page);
         }
+
+        public ActionResult RedirectCounter(IPublishedContent page) {
+            return PartialView("Core/Content Builder/RedirectCounter", new RedirectCounter(page));
+        }
     }
 }

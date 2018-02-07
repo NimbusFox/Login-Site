@@ -31,5 +31,20 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
             }
             return false;
         }
+
+        public static bool HasExceptionOtherThan(this Exception exception, Type type) {
+            var output = false;
+            var child = false;
+
+            if (exception.InnerException != null) {
+                child = exception.InnerException.HasExceptionOtherThan(type);
+            }
+
+            if (exception.GetType() != type) {
+                output = true;
+            }
+
+            return child || output;
+        }
     }
 }

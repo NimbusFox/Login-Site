@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using NimbusFox.Login_Site.Models.Core;
 using Umbraco.Core;
+using Umbraco.Core.Models;
 using Umbraco.Web;
 
 namespace NimbusFox.Login_Site.CodeLibraries.Core {
@@ -15,11 +17,6 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
             var member = MembersHelper.GetCurrentMember();
 
             keyValues.Add("current_member", member != null ? member.Username : "");
-
-            if (UmbracoContext.Current.PageId != null) {
-                member = MembersHelper.GetMember(UmbracoContext.Current.PageId.Value);
-                keyValues.Add("page_member", member.Username);
-            }
 
             if (HttpContext.Current.Request.QueryString.HasKeys()) {
                 var queryString = HttpContext.Current.Request.QueryString;
@@ -39,9 +36,14 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
             keyValues.Add("date", DateTime.Now.ToString("dd/MM/yyyy"));
             keyValues.Add("time", DateTime.Now.ToString("h:mm tt"));
 
+            var site = new SiteModel(GlobalHelper.GetRoot());
+            keyValues.Add("link_login", site.Pages.LoginPage != null ? site.Pages.LoginPage.UrlWithDomain() : "");
+            keyValues.Add("link_register", site.Pages.RegisterPage != null ? site.Pages.RegisterPage.UrlWithDomain() : "");
+            keyValues.Add("link_logout", site.Pages.LogoutPage != null ? site.Pages.LogoutPage.UrlWithDomain() : "");
+
             foreach (var data in keyValues) {
                 if (output.Contains($"${data.Key}")) {
-                    output = output.Replace($"{data.Key}", data.Value);
+                    output = output.Replace($"${data.Key}", data.Value);
                 }
             }
 
