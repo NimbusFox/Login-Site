@@ -6,12 +6,38 @@ using NimbusFox.Login_Site.CodeLibraries.Core.EmailHandlers;
 using NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers;
 using NimbusFox.Login_Site.Models.Core;
 using NimbusFox.Login_Site.Models.Core.AjaxForms;
+using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 
 namespace NimbusFox.Login_Site.Controllers.Core {
     public class CoreAjaxController : SurfaceController {
+
+        public ActionResult Login() {
+            var login = new Login();
+
+            if (Request.HttpMethod.ToLower() == "post") {
+                if (TryUpdateModel(login)) {
+                    login = SessionHandler.LoginValidation(login);
+
+                    if (login.Success) {
+                        var gateway = new AjaxGateway();
+                        var ms = ApplicationContext.Services.MemberService;
+                        var member = ms.Exists(login.Username) ? ms.GetByUsername(login.Username) : ms.GetByEmail(login.Username);
+
+                        if (Members.Login(member.Username, login.Password)) {
+                            return PartialView("Core/Page", new Page(gateway.SuccessfulLogin));
+                        }
+
+                    }
+                }
+            }
+
+            ModelState.Clear();
+            login.Password = "";
+            return PartialView("Core/AjaxForms/LoginForm", login);
+        }
         
         public ActionResult Register() {
             var register = new Register();

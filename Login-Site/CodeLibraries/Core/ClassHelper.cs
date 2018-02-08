@@ -19,6 +19,10 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
             return current.CoreGetName(action);
         }
 
+        public static string GetName<TP>(this Login current, Expression<Func<Login, TP>> action) {
+            return current.CoreGetName(action);
+        }
+
         public static string GetValue(this NameValueCollection collection, string key) {
             return collection.HasKey(key) ? collection[collection.AllKeys.First(x => string.Equals(x, key, StringComparison.CurrentCultureIgnoreCase))] : "";
         }
@@ -36,9 +40,7 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
             var output = false;
             var child = false;
 
-            if (exception.InnerException != null) {
-                child = exception.InnerException.HasExceptionOtherThan(type);
-            }
+            child = exception.InnerException == null || exception.InnerException.HasExceptionOtherThan(type);
 
             if (exception.GetType() != type) {
                 output = true;

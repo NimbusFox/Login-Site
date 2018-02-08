@@ -1,1 +1,22 @@
-﻿
+﻿@using NimbusFox.Login_Site.CodeLibraries.Core
+@using NimbusFox.Login_Site.Models.Core.AjaxForms
+@model NimbusFox.Login_Site.Models.Core.AjaxForms.Login
+<div id="LoginForm">
+    @using (Ajax.BeginForm(new AjaxOptions { InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "LoginForm", HttpMethod = "post", OnComplete = "refreshScripts();", Url = GlobalHelper.AjaxGatewayUrl("login", new Dictionary<string, string>()) })) {
+        <div class="h4">Login</div>
+        <div class="form-group@(Model.GetError(Model.GetName(x => x.Username)).IsNullOrWhiteSpace() ? "" : " has-danger")">
+            @Html.TextBoxFor(model => model.Username, new { placeholder = Model.GetLabel(Model.GetName(x => x.Username)), @class = "form-control" })
+            @if (!Model.GetError(Model.GetName(x => x.Username)).IsNullOrWhiteSpace()) {
+                <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.Username)))</div>
+            }
+        </div>
+        <div class="form-group@(Model.GetError(Model.GetName(x => x.Password)).IsNullOrWhiteSpace() ? "" : " has-danger")">
+            @Html.PasswordFor(model => model.Password, new { placeholder = Model.GetLabel(Model.GetName(x => x.Password)), @class = "form-control" })
+            @if (!Model.GetError(Model.GetName(x => x.Password)).IsNullOrWhiteSpace()) {
+                <div class="invalid-feedback" style="display: block">@Html.Raw(Model.GetError(Model.GetName(x => x.Password)))</div>
+            }
+        </div>
+        Html.RenderPartial("Core/ReCapture");
+        <input class="btn btn-success" type="submit" value="Sign in" />
+    }
+</div>

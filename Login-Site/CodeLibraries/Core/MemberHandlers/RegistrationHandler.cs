@@ -6,6 +6,7 @@ using NimbusFox.Login_Site.Models.Core.AjaxForms;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
+using Umbraco.Web.Models;
 using Umbraco.Web.Security;
 using DateTime = System.DateTime;
 
@@ -62,7 +63,9 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers {
             var specialCharacters = new List<char> { '!', '"', '£', '$', '%', '^', '&', '*', '(', ')', '@', '#', '~', '[', ']', '{', '}', '?', '/', '\\', '|', '-', '_', '=', '+', '`', '¬' };
             int temp;
 
-            pValid = password.Any(x => x.IsLowerCase()) && password.Any(x => x.IsUpperCase()) && password.Any(x => int.TryParse(x.ToString(), out temp)) && password.Any(x => specialCharacters.Contains(x)) && password.Length >= 8;
+            pValid = password.Any(x => x.IsLowerCase()) && password.Any(x => x.IsUpperCase()) &&
+                     password.Any(x => int.TryParse(x.ToString(), out temp)) && password.Any(x => specialCharacters.Contains(x)) 
+                     && password.Length >= 8;
         }
 
         public static string GenerateValidationValue() {
@@ -77,13 +80,13 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers {
         public static IMember CreateMember(Register data) {
             var ms = ApplicationContext.Current.Services.MemberService;
 
-            var member = ms.CreateMember(data.Username, data.Email, data.Username, "member");
+            var member = ms.CreateMemberWithIdentity(data.Username, data.Email, data.Username, "member");
 
-            member.RawPasswordValue = data.Password;
             member.SetValue("dateOfBirth", data.DateOfBirth);
 
             member.SetValue("validated", false);
             member.SetValue("validationCode", GenerateValidationValue());
+            ms.SavePassword(member, data.Password);
 
             return member;
         }

@@ -6,7 +6,6 @@ using Umbraco.Web.Media.EmbedProviders.Settings;
 
 namespace NimbusFox.Login_Site.Models.Core.AjaxForms {
     public class AjaxForm {
-        public string RedirectTo { get; set; }
         public string RecaptchaError { get; set; }
         public bool Success { get; set; }
         private Dictionary<string, string> Errors { get; set; }

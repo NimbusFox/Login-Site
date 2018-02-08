@@ -11,6 +11,7 @@ namespace NimbusFox.Login_Site.Models.Core {
         public IPublishedContent SuccessfulAccountActivation { get; }
         public IPublishedContent FailedAccountActivation { get; }
         public IPublishedContent SuccessfulAccountRegistration { get; }
+        public IPublishedContent SuccessfulLogin { get; }
         private readonly List<IPublishedContent> _defaultVal = new List<IPublishedContent>();
         private readonly IPublishedContent _root;
 
@@ -27,6 +28,8 @@ namespace NimbusFox.Login_Site.Models.Core {
 
                 SuccessfulAccountRegistration = gateway.GetPropertyValue("successfulAccountRegistration", _defaultVal)
                     .FirstOrDefault();
+
+                SuccessfulLogin = gateway.GetPropertyValue("successfulLogin", _defaultVal).FirstOrDefault();
             }
         }
     }
