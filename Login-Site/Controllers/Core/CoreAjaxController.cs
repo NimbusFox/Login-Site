@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using NimbusFox.Login_Site.CodeLibraries.Core;
 using NimbusFox.Login_Site.CodeLibraries.Core.EmailHandlers;
 using NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers;
+using NimbusFox.Login_Site.Models;
 using NimbusFox.Login_Site.Models.Core;
 using NimbusFox.Login_Site.Models.Core.AjaxForms;
 using Umbraco.Core;
@@ -29,7 +31,9 @@ namespace NimbusFox.Login_Site.Controllers.Core {
                         if (Members.Login(member.Username, login.Password)) {
                             return PartialView("Core/Page", new Page(gateway.SuccessfulLogin));
                         }
-
+                        login.AddError(login.GetName(x => x.Username), "Either your username or password was incorrect. Please try again");
+                    } else {
+                        login.AddError(login.GetName(x => x.Username), "Either your username or password was incorrect. Please try again");
                     }
                 }
             }
@@ -38,7 +42,7 @@ namespace NimbusFox.Login_Site.Controllers.Core {
             login.Password = "";
             return PartialView("Core/AjaxForms/LoginForm", login);
         }
-        
+
         public ActionResult Register() {
             var register = new Register();
 
@@ -91,6 +95,28 @@ namespace NimbusFox.Login_Site.Controllers.Core {
             }
 
             return Content("");
+        }
+
+        public ActionResult Settings() {
+            var input = new Dictionary<string, string>();
+
+            if (Request.HttpMethod.ToLower() == "post") {
+                if (TryUpdateModel(input)) {
+
+                }
+            }
+
+            ModelState.Clear();
+
+            var currentSettings = MembersHelper.GetCurrentMember().GetValue<Dictionary<string, string>>("userSettings");
+
+            var output = new UserSettings(currentSettings);
+
+            foreach (var item in input) {
+                output.AddUpdateSettings(item.Key, item.Value);
+            }
+
+            return PartialView("Core/AjaxForms/SettingsForm", output);
         }
     }
 }

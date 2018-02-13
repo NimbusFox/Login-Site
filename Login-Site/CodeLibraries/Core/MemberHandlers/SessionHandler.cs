@@ -17,10 +17,6 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core.MemberHandlers {
             var ms = ApplicationContext.Current.Services.MemberService;
             var valid = !(!ms.Exists(data.Username) && ms.GetByEmail(data.Username) == null);
 
-            if (!valid) {
-                data.AddError(data.GetName(x => x.Username), "Either your username or password was incorrect. Please try again");
-            }
-
             data.Success = valid;
 
             return data;

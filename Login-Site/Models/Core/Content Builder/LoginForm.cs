@@ -2,13 +2,9 @@
 using Umbraco.Web;
 
 namespace NimbusFox.Login_Site.Models.Core.Content_Builder {
-    public class LoginForm {
-        public string RedirectMessage { get; }
+    public class LoginForm : Content {
 
-        public LoginForm() { }
-
-        public LoginForm(IPublishedContent page) {
-            RedirectMessage = page.GetPropertyValue<string>("redirectMessage", "");
+        public LoginForm(IPublishedContent page) : base(page) {
         }
     }
 }

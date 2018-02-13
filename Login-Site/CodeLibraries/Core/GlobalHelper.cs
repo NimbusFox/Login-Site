@@ -9,12 +9,17 @@ using System.Web;
 using System.Web.Mvc;
 using NimbusFox.Login_Site.Models.Core;
 using Newtonsoft.Json;
+using NimbusFox.Login_Site.CodeLibraries.Core.SiteEvents;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 
 namespace NimbusFox.Login_Site.CodeLibraries.Core {
     public static class GlobalHelper {
+
+        static GlobalHelper() {
+            SettingsListenerHelper.Init();
+        }
 
         public static string ContentBuilder {
             get {
@@ -55,7 +60,7 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
 
             var root = GetRoot();
             if (root.Children.Any(x => x.DocumentTypeAlias.ToLower() == "ajaxgateway")) {
-                return root.FirstChild("ajaxGateway").UrlWithDomain() + "?call=" + call + "&" + queryString;
+                return root.FirstChild("ajaxGateway").UrlWithDomain() + "?call=" + call + (queryString.Capacity != 0 ? "&" + queryString : "");
             }
 
             var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
@@ -115,7 +120,7 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
                         { "remoteip", ip }
                     });
 
-                var result = JsonConvert.DeserializeObject<Gresult>(System.Text.Encoding.UTF8.GetString(gresponse));
+                var result = JsonConvert.DeserializeObject<Gresult>(Encoding.UTF8.GetString(gresponse));
 
                 return result.Success;
             }
@@ -139,20 +144,6 @@ namespace NimbusFox.Login_Site.CodeLibraries.Core {
             }
 
             return HttpContext.Current.Request.Form.AllKeys.Any(x => x == "g-recaptcha-response") ? HttpContext.Current.Request.Form["g-recaptcha-response"] : "";
-        }
-
-        public static string RenderEmail(Dictionary<string, string> keys, string email) {
-            var output = email;
-
-            foreach (var item in keys) {
-                var regex = new Regex($"##{item.Key}##", RegexOptions.IgnoreCase);
-
-                if (regex.IsMatch(output)) {
-                    output = output.Replace(regex.Match(output).Value, item.Value);
-                }
-            }
-
-            return output;
         }
 
         public static IPublishedContent GetLatestEdit(IPublishedContent page) {

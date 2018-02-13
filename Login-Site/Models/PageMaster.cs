@@ -1,7 +1,7 @@
 ﻿using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace NimbusFox.Login_Site.Models.Core {
+namespace NimbusFox.Login_Site.Models {
     public class PageMaster : Master {
         public bool DisplayEditedTime { get; set; }
         public bool LoginRequired { get; set; }

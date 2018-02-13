@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NimbusFox.Login_Site.CodeLibraries.Core;
+using NimbusFox.Login_Site.Models;
 using NimbusFox.Login_Site.Models.Core;
 using Umbraco.Core.Models;
 using Umbraco.Web;
@@ -55,6 +56,7 @@ namespace NimbusFox.Login_Site.Controllers.Core {
         }
 
         public ActionResult LogoutDisplay(IPublishedContent page) {
+            Members.Logout();
             return PartialView("Core/Content Builder/LogoutDisplay", new LogoutDisplay(page));
         }
 
@@ -80,6 +82,10 @@ namespace NimbusFox.Login_Site.Controllers.Core {
 
         public ActionResult RedirectCounter(IPublishedContent page) {
             return PartialView("Core/Content Builder/RedirectCounter", new RedirectCounter(page));
+        }
+
+        public ActionResult Settings(IPublishedContent page) {
+            return PartialView("Core/Content Builder/Settings");
         }
     }
 }

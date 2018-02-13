@@ -1,0 +1,18 @@
+﻿@using System.Web.Hosting
+@using NimbusFox.Login_Site.CodeLibraries.Core
+@model NimbusFox.Login_Site.Models.UserSettings
+<div id="SettingsForm">
+    @using (Ajax.BeginForm(new AjaxOptions { InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "RegisterForm", HttpMethod = "post", OnComplete = "refreshScripts();", Url = GlobalHelper.AjaxGatewayUrl("register", new Dictionary<string, string>()) })) {
+        foreach (var settings in new DirectoryInfo(HostingEnvironment.MapPath("~/Views/Shared/UserSettings")).GetFiles("*.cshtml")) {
+            <div class="card text-white bg-primary">
+                <div class="card-header text-center">@settings.Name.Replace(settings.Extension, "")</div>
+                <div class="card-body">
+                    @{ Html.RenderPartial("~/Views/Shared/UserSettings/" + settings.Name, Model); }
+                </div>
+            </div>
+            <div class="text-center card-body">
+                <input type="submit" class="btn btn-success" value="Save" />
+            </div>
+        }
+    }
+</div>

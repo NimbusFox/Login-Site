@@ -1,7 +1,7 @@
 ﻿using Umbraco.Core.Models;
 using Umbraco.Web;
 
-namespace NimbusFox.Login_Site.Models.Core {
+namespace NimbusFox.Login_Site.Models {
     public class Master {
         public string Title { get; set; }
 
